@@ -51,6 +51,26 @@
         janken(hand_pa);
       }
 
+      function fetchAll() { 
+       JankenScore.fetchAll()
+       .then(function(result){
+        var msg="";
+        for(var i=0; i<result.length; i++){
+          msg += result[i].get(key) + "<br>";
+        }
+         $("#display").removeClass();
+         $("#display").addClass("text-light");
+         $("#display").addClass("bg-primary");
+         $("#display").html(msg);
+       })
+       .catch(function(error){
+         $("#display").removeClass();
+         $("#display").addClass("bg-warning");
+         $("#display").html("delete fail:" + JSON.stringify(error));
+       })
+
+      }
+
       function janken(player_hand){
         // コンピュータの手を決定
         comp_hand = Math.floor(Math.random() * 3);
@@ -127,15 +147,23 @@
 <body>
   <h1 class="text-white bg-primary">じゃんけん 連勝チャレンジ！</h1>
   <div id="highscore" class="text-white bg-secondary"></div>
+  <br>
   <div class="mx-auto" style="width: 200px">
     <a onclick="gu();" class="btn btn-outline-primary hand" role="button">ぐー</a>
     <a onclick="choki();" class="btn btn-outline-primary hand" role="button">ちょき</a>
     <a onclick="pa();" class="btn btn-outline-primary hand" role="button">ぱー</a>
     <a onclick="newgame();" class="btn btn-info text-white" id="newgame" role="button">New Game</a>
   </div>
+  <br>
+  <div>
+   <a onclick="fetchAll();" class="btn btn-outline-primary hand" role="button">fetchAll</a>
+        </div><br>
   <div id="result" class="text-white bg-secondary">
   </div>
   <div id="result2" class="bg-warning">
+  </div>
+  <div id="display" class="text-light bg-info">
+    Result
   </div>
 </body>
 </html>

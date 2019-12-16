@@ -81,9 +81,7 @@
           }
           var old = result[i].get(key);
         }
-        // for(var i = 0; i < result.length; i++){
-        //   msg += result[i].get(key) + "<br>";
-        // }
+
          $("#display").removeClass();
          $("#display").addClass("text-light");
          $("#display").addClass("bg-primary");
@@ -95,28 +93,7 @@
          $("#display").html("delete fail"+JSON.stringify(error));
        })
       }
-      function sortDataD(){
-       JankenScore.order(key, false).fetchAll()
-       .then(function(result){
-        var msg = "";
-        for(var i = 0; i < result.length; i++){
-          if(old == result[i].get(key)){
-          }else{
-           msg += result[i].get(key) + "<br>";
-          }
-          var old = result[i].get(key);
-        }
-         $("#display").removeClass();
-         $("#display").addClass("text-light");
-         $("#display").addClass("bg-primary");
-         $("#display").html(msg);
-       })
-       .catch(function(error){
-         $("#display").removeClass();
-         $("#display").addClass("bg-warning");
-         $("#display").html("delete fail"+JSON.stringify(error));
-       })
-      }
+
 
       
 
@@ -206,8 +183,7 @@
   <br>
   <div>
    <a onclick="fetchAll();" class="btn btn-outline-primary hand" role="button">fetchAll</a>
-   <a onclick="sortDataU();" class="btn btn-outline-primary hand" role="button">ソート(降順)</a>
-   <a onclick="sortDataD();" class="btn btn-outline-primary hand" role="button">ソート(昇順)</a>
+   <a onclick="sortDataU();" class="btn btn-outline-primary hand" role="button">ソート(昇順)</a>
   </div>
   <br>
   <div id="result" class="text-white bg-secondary">

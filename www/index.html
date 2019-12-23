@@ -35,6 +35,8 @@
       var ncmb = new NCMB(appKey, clientKey);
       var JankenScore = ncmb.DataStore("JankenScore");
       var key = "score";
+      var player = "name";
+
 
       // ハイスコア
       var high_score = 0;
@@ -94,6 +96,11 @@
        })
       }
 
+      function name_send(){
+        p_name = $("#name").val();
+      }
+
+
 
       
 
@@ -149,9 +156,15 @@
           .catch(function(error){
           });
 
+
+          
+
+
+
           // スコア記録
           db = new JankenScore();
           db.set(key, win_num).save();
+          db.set(player, p_name).save();
 
           msg += win_num +  "連勝でした。<br>";
         } else {
@@ -183,7 +196,7 @@
   <br>
   <div>
    <a onclick="fetchAll();" class="btn btn-outline-primary hand" role="button">プレイ履歴(時間降順)</a>
-   <a onclick="sortDataU();" class="btn btn-outline-primary hand" role="button">ソート(昇順)</a>
+   <a onclick="sortDataU();" class="btn btn-outline-primary hand" role="button">スコア順位(昇順)</a>
   </div>
   <br>
   <div id="result" class="text-white bg-secondary">
@@ -193,5 +206,14 @@
   <div id="display" class="text-light bg-info">
     Result
   </div>
+  <div id="mask" class="mask"></div>
+  <div id="userEditWrapper" class="userEditWrapper">
+  <form id="userEdit">
+  <label for="name">プレイヤー名</label><br />
+  <input type="text" id="name" value="" class="text-input" /><br />
+
+  <a onclick="name_send();" class="btn btn-outline-primary hand" role="button">送信</a>
+  </form>
+</div>
 </body>
 </html>

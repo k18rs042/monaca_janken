@@ -36,6 +36,7 @@
       var JankenScore = ncmb.DataStore("JankenScore");
       var key = "score";
       var player = "name";
+      var p_name = "";
 
 
       // ハイスコア
@@ -58,7 +59,7 @@
        .then(function(result){
         var msg="";
         for(var i=result.length-1; i >= 0; i--){
-          msg += result[i].get(key) + "<br>";
+          msg += "score："  +result[i].get(key) + "　　name："+ result[i].get(player) + "<br>";;
         }
          $("#display").removeClass();
          $("#display").addClass("text-light");
@@ -98,6 +99,7 @@
 
       function name_send(){
         p_name = $("#name").val();
+        $("#now_user").html("現在ユーザー名 [ "+p_name+" ]としてプレイしています。");
       }
 
 
@@ -133,6 +135,8 @@
         .catch(function(error){
           $("#highscore").html("ハイスコア：" + high_score + "連勝");
         });
+
+
   
         win_num = 0;
         // ハンドボタン表示
@@ -155,11 +159,6 @@
           })
           .catch(function(error){
           });
-
-
-          
-
-
 
           // スコア記録
           db = new JankenScore();
@@ -185,6 +184,7 @@
 </head>
 <body>
   <h1 class="text-white bg-primary">じゃんけん 連勝チャレンジ！</h1>
+  <div id="now_user" class="text-white bg-secondary"></div>
   <div id="highscore" class="text-white bg-secondary"></div>
   <br>
   <div class="mx-auto" style="width: 200px">
@@ -207,13 +207,15 @@
     Result
   </div>
   <div id="mask" class="mask"></div>
-  <div id="userEditWrapper" class="userEditWrapper">
+<div id="userEditWrapper" class="userEditWrapper">
   <form id="userEdit">
-  <label for="name">プレイヤー名</label><br />
+  <br>
+  <label for="name">プレイヤー名登録</label><br />
   <input type="text" id="name" value="" class="text-input" /><br />
-
+  <br>
   <a onclick="name_send();" class="btn btn-outline-primary hand" role="button">送信</a>
   </form>
+</div>
 </div>
 </body>
 </html>

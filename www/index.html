@@ -99,7 +99,7 @@
 
       function name_send(){
         p_name = $("#name").val();
-        $("#now_user").html("現在ユーザー名 [ "+p_name+" ]としてプレイしています。");
+        $("#now_user").html("現在、ユーザー名 [ "+p_name+" ]としてプレイしています。");
       }
 
 
@@ -162,7 +162,7 @@
 
           // スコア記録
           db = new JankenScore();
-          db.set(key, win_num).save();
+          db.set(key, win_num);
           db.set(player, p_name).save();
 
           msg += win_num +  "連勝でした。<br>";
@@ -207,7 +207,7 @@
     Result
   </div>
   <div id="mask" class="mask"></div>
-<div id="userEditWrapper" class="userEditWrapper">
+  <div id="userEditWrapper" class="userEditWrapper">
   <form id="userEdit">
   <br>
   <label for="name">プレイヤー名登録</label><br />

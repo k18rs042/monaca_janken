@@ -77,10 +77,14 @@
        JankenScore.order(key, true).fetchAll()
        .then(function(result){
         var msg = "";
+        var n = 0;
+        
+        
         for(var i = 0; i < result.length; i++){
           if(old == result[i].get(key)){
           }else{
-           msg += result[i].get(key) + "<br>";
+            n ++;
+           msg += n +"位スコア："+ result[i].get(key) + "<br>";
           }
           var old = result[i].get(key);
         }

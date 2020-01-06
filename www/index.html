@@ -71,7 +71,7 @@
           .then(function(result){
            var msg="";
            for(var i=result.length-1; i >= 0; i--){
-             msg += "score："  +result[i].get(key) + "　　name："+ result[i].get(player) + "<br>";;
+             msg += "score："  +result[i].get(key) + "　　name："+ result[i].get(player) + "<br>";
            }
             $("#display").removeClass();
             $("#display").addClass("text-light");
@@ -124,6 +124,7 @@
       function name_send(){
         p_name = $("#name").val();
         $("#now_user").html("現在、ユーザー名 [ "+p_name+" ]としてプレイしています。");
+        $("#name").val("");
       }
 
 

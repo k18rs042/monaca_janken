@@ -44,14 +44,18 @@
 
       function gu() {
         janken(hand_gu);
+        $("#userEditWrapper").hide();
+       
       }
 
       function choki() {
         janken(hand_choki);
+        $("#userEditWrapper").hide();
       }
 
       function pa() {
         janken(hand_pa);
+        $("#userEditWrapper").hide();
       }
 
       function fetchAll() { 
@@ -149,6 +153,7 @@
         $("#newgame").css("display", "none");
         $("#result").html("じゃんけん・・・ぽん")
         $("#result2").html("");
+        $("#userEditWrapper").show();
       }
 
       function gameover() {

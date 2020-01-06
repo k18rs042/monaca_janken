@@ -42,6 +42,9 @@
       // ハイスコア
       var high_score = 0;
 
+      var bs1 = 1;
+      var bs2 = 1;
+
       function gu() {
         janken(hand_gu);
         $("#userEditWrapper").hide();
@@ -59,50 +62,63 @@
       }
 
       function fetchAll() { 
-       JankenScore.fetchAll()
-       .then(function(result){
-        var msg="";
-        for(var i=result.length-1; i >= 0; i--){
-          msg += "score："  +result[i].get(key) + "　　name："+ result[i].get(player) + "<br>";;
+        if(bs1 == 0){
+          var msg1 = "";
+          $("#display").html(msg1);
+          bs1 = 1;
+        }else if(bs1 == 1){
+          JankenScore.fetchAll()
+          .then(function(result){
+           var msg="";
+           for(var i=result.length-1; i >= 0; i--){
+             msg += "score："  +result[i].get(key) + "　　name："+ result[i].get(player) + "<br>";;
+           }
+            $("#display").removeClass();
+            $("#display").addClass("text-light");
+            $("#display").addClass("bg-primary");
+            $("#display").html(msg);
+          })
+          .catch(function(error){
+            $("#display").removeClass();
+            $("#display").addClass("bg-warning");
+            $("#display").html("delete fail:" + JSON.stringify(error));
+          })
+          bs1 = 0;
         }
-         $("#display").removeClass();
-         $("#display").addClass("text-light");
-         $("#display").addClass("bg-primary");
-         $("#display").html(msg);
-       })
-       .catch(function(error){
-         $("#display").removeClass();
-         $("#display").addClass("bg-warning");
-         $("#display").html("delete fail:" + JSON.stringify(error));
-       })
-
       }
-      function sortDataU(){
-       JankenScore.order(key, true).fetchAll()
-       .then(function(result){
-        var msg = "";
-        var n = 0;
-        
-        
-        for(var i = 0; i < result.length; i++){
-          if(old == result[i].get(key)){
-          }else{
-            n ++;
-           msg += n +"位スコア："+ result[i].get(key) + "<br>";
-          }
-          var old = result[i].get(key);
-        }
 
-         $("#display").removeClass();
-         $("#display").addClass("text-light");
-         $("#display").addClass("bg-primary");
-         $("#display").html(msg);
-       })
-       .catch(function(error){
-         $("#display").removeClass();
-         $("#display").addClass("bg-warning");
-         $("#display").html("delete fail"+JSON.stringify(error));
-       })
+      function sortDataU(){
+        if(bs2 == 0){
+          var msg2 = "";
+          $("#display").html(msg2);
+          bs2 = 1;
+        }else if(bs2 == 1){
+           JankenScore.order(key, true).fetchAll()
+           .then(function(result){
+            var msg = "";
+            var n = 0;
+        
+            for(var i = 0; i < result.length; i++){
+              if(old == result[i].get(key)){
+              }else{
+                n ++;
+                msg += n +"位スコア："+ result[i].get(key) + "<br>";
+              }
+              var old = result[i].get(key);
+            }
+
+             $("#display").removeClass();
+             $("#display").addClass("text-light");
+             $("#display").addClass("bg-primary");
+             $("#display").html(msg);
+           })
+           .catch(function(error){
+             $("#display").removeClass();
+             $("#display").addClass("bg-warning");
+             $("#display").html("delete fail"+JSON.stringify(error));
+           })
+           bs2 = 0;
+        }
       }
 
       function name_send(){
